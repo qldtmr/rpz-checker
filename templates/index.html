@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPZ Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>RPZ Checker</h1>
+        <form id="domain-check-form">
+            Domain names (single or multiple, separated by commas or new lines):
+            <textarea id="domain" name="domain" required placeholder="Enter domain(s) here, separated by commas or new lines"></textarea>
+            <input type="submit" value="Check">
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Focus on the text input field when the page loads
+        window.onload = function() {
+            document.getElementById('domain').focus();
+        };
+    </script>
+</body>
+</html>
