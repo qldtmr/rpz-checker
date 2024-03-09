@@ -8,11 +8,23 @@
     <div class="container">
         <h1>RPZ Checker</h1>
         <form id="domain-check-form">
-            Domain names (single or multiple, separated by commas or new lines):
-            <textarea id="domain" name="domain" required placeholder="Enter domain(s) here, separated by commas or new lines"></textarea>
+            <textarea id="domain" name="domain" required="" placeholder="Enter domain(s) here, separated by commas or new lines" style="height: 35px; font-size: 14pt"></textarea>
             <input type="submit" value="Check">
+
+            <div class="form-control">
+                <input type="checkbox" id="queryOriginalDomain" name="queryOriginalDomain"><label for="queryOriginalDomain">Query original domain</label>
+            </div>
+            <div class="form-control">
+                <input type="checkbox" id="autoRefresh" name="autoRefresh"><label for="autoRefresh">Auto-refresh every </label><input type="number" id="refreshInterval" name="refreshInterval" min="1" max="60" value="10"><label for="refreshInterval"> seconds</label>
+            </div>
         </form>
-        <div id="result"></div>
+        <div id="result" class="result-log"></div>
+        <div id="autoRefreshStatus"></div>
+        <div id="lastUpdateTime"></div>
+        <button id="toggleDebugLog">Show Debug Log</button>
+        <div id="debugLogContainer" class="result-log" style="display: none;">
+            <pre id="debugLog"></pre>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
@@ -23,3 +35,4 @@
     </script>
 </body>
 </html>
+

@@ -35,7 +35,3 @@ Ensure you have Python installed on your system. This application was developed 
 - Enter the domain name(s) you wish to check in the text area provided on the webpage. You can enter multiple domains separated by commas or new lines.
 - Click the "Check" button to submit your query.
 - The application will display whether each domain is blacklisted and the reason for its status.
-
-## Screenshot
-
-![](demo-screenshot-01.png)

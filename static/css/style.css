@@ -12,13 +12,15 @@ body {
   line-height: 1.6;
 }
 
+/* Adjust the container styling to ensure it centers everything properly */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 0 20px;
+  width: 100%;
+  max-width: 1000px; /* or whatever max-width your form has */
+  margin: auto;
+  padding: 0 20px; /* Adjust based on your design */
 }
 
 h1 {
@@ -27,12 +29,10 @@ h1 {
   font-weight: bold;
 }
 
+/* Ensure the form takes up the full width of its container */
 form {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding does not add to the width */
 }
 
 input[type="text"], input[type="submit"] {
@@ -64,18 +64,21 @@ input[type="submit"]:active {
   transform: scale(0.98); /* Snappy click effect */
 }
 
+/* Adjust the result box to match the form's width */
 #result {
-  margin-top: 2rem;
-  background-color: #f8f9fa;
-  border-radius: 4px;
+  width: 100%; /* Matches the form width */
+  box-sizing: border-box; /* Considers padding as part of the width */
+  /* Additional styles to match the form (padding, border, etc.) */
   padding: 1rem;
-  width: 100%;
-  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 1rem;
+  background-color: #f8f9fa;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  border: 1px solid #dcdcdc;
-  opacity: 0; /* Prepare for animation */
-  /* Fade-in effect */
-  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.monospace {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* Keyframes for animations */
@@ -110,4 +113,85 @@ textarea {
 
 textarea:focus {
   height: auto; /* Expands based on content */
+}
+
+.result-log {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 1rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#debugLog {
+  font-family: monospace;
+  white-space: pre-wrap; /* Ensures formatted output is displayed properly */
+}
+
+/* Hide/show button for debug log */
+#toggleDebugLog {
+  margin-bottom: 1rem;
+}
+
+.detected-link {
+  color: #005a9c; /* Subtle blue, adjust as needed */
+  text-decoration: none;
+}
+
+.detected-link:hover {
+  text-decoration: underline; /* Adds underline on hover for better user interaction */
+}
+
+/* Style adjustments for checkboxes */
+.form-control {
+  /* display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem; */
+}
+
+/* Improve the button styling for the debug log */
+#toggleDebugLog {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative; /* Position relative to its normal position */
+  top: 20px;
+}
+
+/* Adjust the visibility of the tucked-away debug log */
+#debugLogContainer {
+  transition: margin-top 0.3s ease;
+  margin-top: -20px; /* Adjust as needed to only show a hint of the debug log area */
+}
+
+#debugLogContainer.expanded {
+  margin-top: 0; /* No margin when expanded */
+}
+
+/* Style improvements for results display */
+#result p {
+  margin-bottom: 0.5rem;
+}
+
+#result strong {
+  display: block; /* Place the domain on a new line */
+}
+
+#result span {
+  display: block; /* Place status and reason on new lines */
+  margin-top: 0.5rem;
+}
+
+.status-blacklisted {
+  color: red;
+}
+
+.status-not-blacklisted {
+  color: green;
 }
