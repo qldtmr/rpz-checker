@@ -16,21 +16,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleDebugLogButton = document.getElementById("toggleDebugLog");
     const debugLog = document.getElementById("debugLog");
 
+    // Check if there are domains in the URL hash when the page loads
+    if (window.location.hash) {
+        // Decode the hash and set it as the textarea value
+        var hashDomains = window.location.hash.slice(1).split(',');
+        domainTextArea.value = hashDomains.join('\n');
+        checkDomains(); // Automatically perform the domain check
+    }
+
+    function updateUrlHash(domains) {
+        window.location.hash = domains.join(',');
+    }
+
     form.addEventListener("submit", function(e) {
         e.preventDefault();
         checkDomains();
         setupAutoRefresh();
     })
-
-    // stopButton.addEventListener("click", function() {
-    //     clearInterval(autoRefreshTimer);
-    //     autoRefreshTimer = null;
-    //     clearInterval(countdownTimer);
-    //     countdownTimer = null;
-    //     autoRefreshStatus.textContent = '';
-    //     // stopButton.style.display = 'none';
-    //     autoRefreshCheckbox.checked = false;
-    // });
 
     function checkDomains() {
         const domainInput = domainTextArea.value;
@@ -43,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function() {
             // For this example, we directly send the entry to the backend where the main logic resides
             return entry;
         });
+
+        // Update the URL hash with the current domains
+        updateUrlHash(domains);
 
         // Include queryOriginalDomain option in the request
         const queryOriginalDomain = queryOriginalDomainCheckbox.checked;
