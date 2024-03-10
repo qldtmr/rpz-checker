@@ -2,6 +2,9 @@ from flask import Flask, request, render_template, jsonify
 from urllib.parse import unquote, urlparse
 import re
 import dns.resolver
+import threading
+import webbrowser
+import os
 
 app = Flask(__name__)
 
@@ -35,6 +38,9 @@ def index():
     # Serve the index.html file
     return render_template('index.html', default_dns_server=default_dns_server)
 
+def open_browser():
+      webbrowser.open_new('http://127.0.0.1:5000/')
+
 @app.route('/check-domain', methods=['POST'])
 def check_domain():
     domains = request.json['domains']
@@ -62,4 +68,5 @@ def lookup_domain(domain, dns_server):
         return "Error", f"An error occurred: {e}"
 
 if __name__ == '__main__':
+    threading.Timer(2, open_browser).start()
     app.run(debug=True)
