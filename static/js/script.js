@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const autoRefreshStatus = document.getElementById("autoRefreshStatus");
     const lastUpdateTime = document.getElementById("lastUpdateTime");
     const stopButton = document.getElementById("stopButton");
+    const dnsServerInput = document.getElementById("dnsServer");
     let autoRefreshTimer = null;
     let countdownTimer = null;
     let countdown = 0;
@@ -52,12 +53,14 @@ document.addEventListener("DOMContentLoaded", function() {
         // Include queryOriginalDomain option in the request
         const queryOriginalDomain = queryOriginalDomainCheckbox.checked;
 
+        const dnsServer = dnsServerInput.value;
+
         fetch('/check-domain', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({domains: domains, queryOriginalDomain: queryOriginalDomain})
+            body: JSON.stringify({domains: domains, queryOriginalDomain: queryOriginalDomain, dnsServer: dnsServer})
         })
         .then(response => response.json())
         .then(data => {

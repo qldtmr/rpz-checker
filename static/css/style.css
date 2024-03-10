@@ -146,11 +146,11 @@ textarea:focus {
 }
 
 /* Style adjustments for checkboxes */
-.form-control {
-  /* display: flex;
+/* .form-control {
+  display: flex;
   flex-direction: column;
-  margin-bottom: 1rem; */
-}
+  margin-bottom: 1rem;
+} */
 
 /* Improve the button styling for the debug log */
 #toggleDebugLog {

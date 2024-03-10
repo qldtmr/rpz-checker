@@ -30,20 +30,26 @@ def extract_domain_from_url(url):
 
 @app.route('/')
 def index():
+    # Get the default nameserver from the resolver
+    default_dns_server = dns.resolver.Resolver().nameservers[0]
     # Serve the index.html file
-    return render_template('index.html')
+    return render_template('index.html', default_dns_server=default_dns_server)
 
 @app.route('/check-domain', methods=['POST'])
 def check_domain():
     domains = request.json['domains']
+    dns_server = request.json['dnsServer']  # Read the DNS server from the request data
     results = []
     for domain in domains:
         processed_domain = extract_domain_from_url(domain)
-        status, reason = lookup_domain(processed_domain)
+        status, reason = lookup_domain(processed_domain, dns_server)
         results.append({'domain': domain, 'processed_domain': processed_domain, 'status': status, 'reason': reason})
     return jsonify(results)
 
-def lookup_domain(domain):
+def lookup_domain(domain, dns_server):
+    resolver = dns.resolver.Resolver()
+    resolver.nameservers = [dns_server]  # Set the nameservers to the provided DNS server
+
     try:
         dns.resolver.resolve(f"{domain}.rpz.blacklist", "A")
         reason = dns.resolver.resolve(f"{domain}.rpz.blacklist", "TXT")

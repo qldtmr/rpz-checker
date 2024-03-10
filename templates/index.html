@@ -17,6 +17,9 @@
             <div class="form-control">
                 <input type="checkbox" id="autoRefresh" name="autoRefresh"><label for="autoRefresh">Auto-refresh every </label><input type="number" id="refreshInterval" name="refreshInterval" min="1" max="60" value="10"><label for="refreshInterval"> seconds</label>
             </div>
+            <label for="dnsServer">DNS Server:</label>
+            <input type="text" id="dnsServer" name="dnsServer" value="{{ default_dns_server }}" style="width: 120px; padding: 5px">
+
         </form>
         <div id="result" class="result-log"></div>
         <div id="autoRefreshStatus"></div>
